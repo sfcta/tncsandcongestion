@@ -14125,6 +14125,7 @@ var MISSING_COLOR = '#ccd';
 var ZERO_COLOR = '#666';
 var DEF_BWIDTH = 4;
 var chart_deftitle = 'All Segments Combined';
+var BUTTON_COLORS = ['#eda202', '#d1c447', '#bf3338'];
 
 var sel_colorvals = void 0,
     sel_colors = void 0,
@@ -14269,10 +14270,18 @@ function showSegmentDetails(latlng) {
   });
 }
 
+function convertHex(hex) {
+  hex = hex.replace('#', '');
+  var r = parseInt(hex.substring(0, 2), 16);
+  var g = parseInt(hex.substring(2, 4), 16);
+  var b = parseInt(hex.substring(4, 6), 16);
+
+  return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
 Chart.defaults.global.defaultFontColor = 'white';
 var facChart = null;
-var fac_colors = { Network: 'rgb(0, 0, 0)', Population: 'rgb(245, 97, 0)', Employment: 'rgb(234, 174, 0)', TNC: 'rgb(212, 21, 21)' };
-//let fac_colors = {Network:'rgb(0, 0, 0)',Population:'rgb(252, 181, 28)',Employment:'rgb(245, 235, 145)',TNC:'rgb(191, 51, 56)'};
+var fac_colors = { Network: 'rgb(0, 0, 0)', Population: convertHex(BUTTON_COLORS[0]), Employment: convertHex(BUTTON_COLORS[1]), TNC: convertHex(BUTTON_COLORS[2]) };
 function updateFACChart() {
   var fdata = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 

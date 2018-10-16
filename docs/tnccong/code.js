@@ -134,6 +134,7 @@ const MISSING_COLOR = '#ccd';
 const ZERO_COLOR = '#666';
 const DEF_BWIDTH = 4;
 const chart_deftitle = 'All Segments Combined';
+const BUTTON_COLORS = ['#eda202','#d1c447','#bf3338'];
 
 let sel_colorvals, sel_colors, sel_binsflag;
 let geoLayer, mapLegend;
@@ -507,10 +508,18 @@ function showSegmentDetails(latlng) {
   });
 }
 
+function convertHex(hex){
+    hex = hex.replace('#','');
+    let r = parseInt(hex.substring(0,2), 16);
+    let g = parseInt(hex.substring(2,4), 16);
+    let b = parseInt(hex.substring(4,6), 16);
+
+    return 'rgb('+r+','+g+','+b+')';
+}
+
 Chart.defaults.global.defaultFontColor = 'white';
 var facChart = null;
-let fac_colors = {Network:'rgb(0, 0, 0)',Population:'rgb(245, 97, 0)',Employment:'rgb(234, 174, 0)',TNC:'rgb(212, 21, 21)'};
-//let fac_colors = {Network:'rgb(0, 0, 0)',Population:'rgb(252, 181, 28)',Employment:'rgb(245, 235, 145)',TNC:'rgb(191, 51, 56)'};
+let fac_colors = {Network:'rgb(0, 0, 0)',Population:convertHex(BUTTON_COLORS[0]),Employment:convertHex(BUTTON_COLORS[1]),TNC:convertHex(BUTTON_COLORS[2])};
 function updateFACChart(fdata={}) {
   let pdata = [];
   let plabels = [];
@@ -687,7 +696,7 @@ let app = new Vue({
       'net': true,
       'pop': true,
       'emp': true,
-      'tnc': true,
+      'tnc': true
     },
     
     selected_colorscheme: ['#ffffcc','#f2ad86','#d55175','#963d8e','#3f324f'],
